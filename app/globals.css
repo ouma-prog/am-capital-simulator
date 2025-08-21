@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+/* Dites à Tailwind où scanner votre code */
+@source "../app/**/*.{js,ts,jsx,tsx}" "../components/**/*.{js,ts,jsx,tsx}";
+
+/* (Optionnel) Thème A&M Capital */
+@theme {
+  --color-am-blue: #002B45;
+  --color-am-gold: #BFA45F;
+  --color-am-ink:  #0F172A;
+}
+
+/* Style global léger */
+html, body { color: var(--color-am-ink); background: #fff; }
