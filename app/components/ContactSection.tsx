@@ -2,17 +2,22 @@
 
 import { useState } from 'react';
 
+// Types d’états possibles pour le formulaire
 type FormState = 'idle' | 'loading' | 'success' | 'error';
 
 export default function ContactSection() {
+  // État du formulaire : attente, envoi, succès ou erreur
   const [state, setState] = useState<FormState>('idle');
+  // Message d’erreur éventuel à afficher à l’utilisateur
   const [errorMsg, setErrorMsg] = useState<string>('');
 
+  // Fonction déclenchée à la soumission du formulaire
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setState('loading');
+    e.preventDefault(); // Empêche le rechargement de la page
+    setState('loading'); // Passe en mode "chargement"
     setErrorMsg('');
 
+    // Récupère les champs du formulaire
     const fd = new FormData(e.currentTarget);
     const payload = {
       name: String(fd.get('name') || ''),
@@ -20,19 +25,25 @@ export default function ContactSection() {
       phone: String(fd.get('phone') || ''),
       city: String(fd.get('city') || ''),
       message: String(fd.get('message') || ''),
-      consent: fd.get('consent') === 'on',
+      consent: fd.get('consent') === 'on', // Consentement obligatoire
     };
 
     try {
+      // Envoi des données vers l’API Next.js (/api/contact)
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
+
+      // Si le serveur répond avec une erreur → exception
       if (!res.ok) throw new Error('Server error');
+
+      // Succès → on réinitialise le formulaire
       setState('success');
       (e.target as HTMLFormElement).reset();
     } catch (err) {
+      // En cas d’erreur → affichage d’un message utilisateur
       setState('error');
       setErrorMsg(
         err instanceof Error ? err.message : "Une erreur est survenue. Merci de réessayer."
@@ -43,6 +54,7 @@ export default function ContactSection() {
   return (
     <section id="contact" className="bg-slate-50">
       <div className="mx-auto max-w-7xl px-6 py-16">
+        {/* En-tête de section */}
         <div className="mb-10">
           <h2 className="text-2xl md:text-3xl font-semibold text-slate-900">
             Contact
@@ -53,7 +65,7 @@ export default function ContactSection() {
         </div>
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          {/* Carte infos */}
+          {/* Carte infos entreprise */}
           <div className="rounded-xl border bg-white p-6">
             <img src="/images/logoA&M.png" alt="A&M Capital" className="h-8 w-auto mb-4" />
             <div className="space-y-3 text-sm text-slate-700">
@@ -64,6 +76,7 @@ export default function ContactSection() {
                   Données marché 2025 — mises à jour en temps réel. Démo technique.
                 </p>
               </div>
+              {/* Badges sources */}
               <div className="flex gap-2 pt-2">
                 <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs text-emerald-800">
                   MeilleursAgents
@@ -78,9 +91,10 @@ export default function ContactSection() {
             </div>
           </div>
 
-          {/* Formulaire */}
+          {/* Formulaire de contact */}
           <div className="lg:col-span-2 rounded-xl border bg-white p-6">
             <form className="grid grid-cols-1 gap-4 md:grid-cols-2" onSubmit={onSubmit}>
+              {/* Nom complet */}
               <div className="md:col-span-1">
                 <label className="block text-sm font-medium text-slate-700">Nom complet</label>
                 <input
@@ -91,6 +105,7 @@ export default function ContactSection() {
                 />
               </div>
 
+              {/* Email */}
               <div className="md:col-span-1">
                 <label className="block text-sm font-medium text-slate-700">Email</label>
                 <input
@@ -102,6 +117,7 @@ export default function ContactSection() {
                 />
               </div>
 
+              {/* Téléphone optionnel */}
               <div className="md:col-span-1">
                 <label className="block text-sm font-medium text-slate-700">Téléphone (optionnel)</label>
                 <input
@@ -111,6 +127,7 @@ export default function ContactSection() {
                 />
               </div>
 
+              {/* Ville */}
               <div className="md:col-span-1">
                 <label className="block text-sm font-medium text-slate-700">Ville</label>
                 <input
@@ -120,6 +137,7 @@ export default function ContactSection() {
                 />
               </div>
 
+              {/* Message */}
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-slate-700">Message</label>
                 <textarea
@@ -131,6 +149,7 @@ export default function ContactSection() {
                 />
               </div>
 
+              {/* Consentement RGPD */}
               <div className="md:col-span-2 flex items-start gap-2 text-sm">
                 <input id="consent" name="consent" type="checkbox" required className="mt-1" />
                 <label htmlFor="consent" className="text-slate-600">
@@ -138,6 +157,7 @@ export default function ContactSection() {
                 </label>
               </div>
 
+              {/* Bouton + messages de retour */}
               <div className="md:col-span-2 flex items-center gap-3">
                 <button
                   type="submit"
