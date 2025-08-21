@@ -10,7 +10,7 @@ export default function Header() {
         {/* Logo cliquable vers la page d'accueil */}
         <Link href="/" className="flex items-center gap-2">
           <img 
-            src="/images/logoA&M.png" 
+            src="/images/logoAM.png" 
             alt="A&M Capital" 
             className="h-8 w-auto" 
           />
