@@ -16,7 +16,9 @@
     "next": "15.5.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "test": "vitest"
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage"
 
   },
   "devDependencies": {
