@@ -7,7 +7,7 @@ export const metadata = {
   title: "A&M Capital – Simulateur d’investissement",   // <title> de la page
   description: "Simulateur locatif interactif par A&M Capital", // <meta description>
   icons: {
-    icon: "/images/logoA&M.png", // favicon affichée dans l’onglet
+    icon: "/images/logoAM.png", // favicon affichée dans l’onglet
   },
 };
 

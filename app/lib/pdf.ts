@@ -12,7 +12,7 @@ const fmtPct = (v: number) =>
   `${v.toFixed(2).replace('.', ',')} %`;
 
 // --- Chargement du logo (depuis /public/images/logoA&M.png) ---
-async function loadLogoDataUrl(path = "/images/logoA&M.png"): Promise<string | null> {
+async function loadLogoDataUrl(path = "/images/logoAM.png"): Promise<string | null> {
   try {
     const res = await fetch(path);    // Récupère l'image du serveur
     const blob = await res.blob();    // Transforme en Blob
