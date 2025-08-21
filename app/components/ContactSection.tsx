@@ -67,7 +67,7 @@ export default function ContactSection() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Carte infos entreprise */}
           <div className="rounded-xl border bg-white p-6">
-            <img src="/images/logoA&M.png" alt="A&M Capital" className="h-8 w-auto mb-4" />
+            <img src="/images/logoAM.png" alt="A&M Capital" className="h-8 w-auto mb-4" />
             <div className="space-y-3 text-sm text-slate-700">
               <p>📍 20 Rue Ampère, 91300 Massy</p>
               <p>📧 contact@amcapital.com</p>
